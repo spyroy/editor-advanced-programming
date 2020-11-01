@@ -28,6 +28,7 @@ class Document{
         bool add_row_befor(std::string row);
         bool after_i();
         bool change_current_row(std::string row);
+        bool after_c(int i);
         bool delete_current_row();
         bool search_for_text(std::string text);
         bool swap_text(std::string old_t, std::string new_t);

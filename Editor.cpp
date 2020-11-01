@@ -63,14 +63,16 @@ void Editor::loop(){
             case 'i':{
                 bool flag = false;
                 std::string txt;
-                while(true){
+                while(doc.get_rows() != 0){
+                    std::cout << "im here" << std::endl;
                     std::getline(std::cin,txt);
                     flag = doc.add_row_befor(txt);
                     if(flag == false){
                         break;
                     }
                 }
-                doc.after_i();
+                if(doc.get_rows() != 0)
+                    doc.after_i();
                 std::cin.clear();
                 break;
             }
@@ -79,13 +81,16 @@ void Editor::loop(){
             case 'c':{
                 bool flag = false;
                 std::string txt;
+                int i = 0;
                 while(true){
                     std::getline(std::cin,txt);
                     flag = doc.change_current_row(txt);
+                    i++;
                     if(flag == false){
                         break;
                     }
                 }
+                doc.after_c(i);
                 std::cin.clear();
                 break;
             }

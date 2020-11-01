@@ -45,6 +45,10 @@ bool Document::move_pointer_to(int to){
         return false;
     }
     row_pointer = to;
+    std::cout << "row_pointer: " << row_pointer << " rows: " << rows << std::endl;
+    for (auto line = doc.begin(); line != doc.end(); ++line){
+        std::cout << *line << std::endl;
+    } 
     return true;
 }
 
@@ -55,6 +59,10 @@ bool Document::add_to_pointer(int add){
         return false;
     }
     row_pointer += add;
+    std::cout << "row_pointer: " << row_pointer << " rows: " << rows << std::endl;
+    for (auto line = doc.begin(); line != doc.end(); ++line){
+        std::cout << *line << std::endl;
+    } 
     return true;
 }
 
@@ -65,12 +73,20 @@ bool Document::subtruct_from_pointer(int sub){
         return false;
     }
     row_pointer -= sub;
+    std::cout << "row_pointer: " << row_pointer << " rows: " << rows << std::endl;
+    for (auto line = doc.begin(); line != doc.end(); ++line){
+        std::cout << *line << std::endl;
+    } 
     return true;
 }
 
 /* '$' case */
 bool Document::go_to_last(){
     row_pointer = rows;
+    std::cout << "row_pointer: " << row_pointer << " rows: " << rows << std::endl;
+    for (auto line = doc.begin(); line != doc.end(); ++line){
+        std::cout << *line << std::endl;
+    } 
     return true;
 }
 
@@ -129,7 +145,14 @@ bool Document::change_current_row(std::string row){
     if(row == "."){
         return false;
     }
-    doc.at(row_pointer-1) = row;
+    add_row_after(row);
+    return true;
+}
+
+bool Document::after_c(int i){
+    row_pointer -= i-1;
+    delete_current_row();
+    row_pointer += i-1;
     return true;
 }
 
@@ -142,8 +165,13 @@ bool Document::delete_current_row(){
     std::vector<std::string>::iterator it;
     it = doc.begin();
     doc.erase(it+row_pointer-1);
-    row_pointer--;
+    if(rows == 1)
+        row_pointer--;
     rows--;
+    std::cout << "row_pointer: " << row_pointer << " rows: " << rows << std::endl;
+    for (auto line = doc.begin(); line != doc.end(); ++line){
+        std::cout << *line << std::endl;
+    } 
     return true;
 }
 
@@ -190,6 +218,11 @@ bool Document::search_for_text(std::string text){
         return false;
     }
 
+    std::cout << "row_pointer: " << row_pointer << " rows: " << rows << std::endl;
+    for (auto line = doc.begin(); line != doc.end(); ++line){
+        std::cout << *line << std::endl;
+    } 
+
     return true;
 }
 
@@ -209,6 +242,10 @@ bool Document::swap_text(std::string old_t, std::string new_t){
         return false;
     }
     doc.at(row_pointer-1).replace(index,old_t.size(),new_t);
+    std::cout << "row_pointer: " << row_pointer << " rows: " << rows << std::endl;
+    for (auto line = doc.begin(); line != doc.end(); ++line){
+        std::cout << *line << std::endl;
+    } 
     return true;
 }
 
@@ -224,6 +261,10 @@ bool Document::join(){
     it = doc.begin()+row_pointer;
     doc.erase(it);
     rows--;
+    std::cout << "row_pointer: " << row_pointer << " rows: " << rows << std::endl;
+    for (auto line = doc.begin(); line != doc.end(); ++line){
+        std::cout << *line << std::endl;
+    } 
     return true;
 }
 
