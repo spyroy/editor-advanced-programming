@@ -291,17 +291,6 @@ bool Document::write_to_file(std::string file){
         }
     }
     inFile.close();
-    
-    // std::ofstream output(file);
-    // if(output.is_open()){
-    //     std::ostream_iterator<std::string> output_file(output, "\n");
-    //     std::vector<std::string>::iterator it;
-    //     it = doc.begin();
-    //     std::vector<std::string>::iterator it2;
-    //     it2 = doc.end();
-    //     copy(it,it2,output_file);
-    // }
-    // output.close();
-    
+
     return true;
 }
