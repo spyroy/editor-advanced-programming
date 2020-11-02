@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <iterator>
 
 /* constructor */
 Document::Document() {
@@ -150,7 +151,8 @@ bool Document::change_current_row(std::string row){
 }
 
 bool Document::after_c(int i){
-    row_pointer -= i-1;
+    std::cout << "i is " << i << std::endl;
+    row_pointer -= i;
     delete_current_row();
     row_pointer += i-1;
     return true;
@@ -272,10 +274,34 @@ bool Document::join(){
 bool Document::write_to_file(std::string file){
     std::vector<std::string> tmp;
     copy(doc.begin(), doc.end(), back_inserter(tmp));
-    std::ofstream outfile (file);
-    while(!tmp.empty()){
-        outfile << tmp.front() << std::endl;
-        tmp.erase(tmp.begin());
+    std::fstream inFile;
+    inFile.open(file);
+    if (inFile.fail()) {
+        std::ofstream outfile (file);
+        while(!tmp.empty()){
+            outfile << tmp.front() << std::endl;
+            tmp.erase(tmp.begin());
+        }
     }
+    else
+    {
+        while(!tmp.empty()){
+            inFile << tmp.front() << std::endl;
+            tmp.erase(tmp.begin());
+        }
+    }
+    inFile.close();
+    
+    // std::ofstream output(file);
+    // if(output.is_open()){
+    //     std::ostream_iterator<std::string> output_file(output, "\n");
+    //     std::vector<std::string>::iterator it;
+    //     it = doc.begin();
+    //     std::vector<std::string>::iterator it2;
+    //     it2 = doc.end();
+    //     copy(it,it2,output_file);
+    // }
+    // output.close();
+    
     return true;
 }

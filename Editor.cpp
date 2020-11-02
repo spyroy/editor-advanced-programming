@@ -64,7 +64,6 @@ void Editor::loop(){
                 bool flag = false;
                 std::string txt;
                 while(doc.get_rows() != 0){
-                    std::cout << "im here" << std::endl;
                     std::getline(std::cin,txt);
                     flag = doc.add_row_befor(txt);
                     if(flag == false){
@@ -85,10 +84,10 @@ void Editor::loop(){
                 while(true){
                     std::getline(std::cin,txt);
                     flag = doc.change_current_row(txt);
-                    i++;
                     if(flag == false){
                         break;
                     }
+                    i++;
                 }
                 doc.after_c(i);
                 std::cin.clear();
@@ -134,7 +133,7 @@ void Editor::loop(){
 
             /* write to file */
             case 'w':{
-                input = input.substr(1,input.size()-1);
+                input = input.substr(2,input.size()-1);
                 doc.write_to_file(input);
                 std::cin.clear();
                 break;
